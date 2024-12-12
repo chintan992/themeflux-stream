@@ -1,56 +1,45 @@
-const TMDB_API_KEY = '297f1b91919bae59d50ed815f8d2e14c';
-const BASE_URL = 'https://api.themoviedb.org/3';
+import { Movie, TVShow } from '@/lib/tmdb';
 
-export interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-  overview: string;
-  vote_average: number;
-  release_date: string;
+class TMDBClient {
+  private readonly API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+  private readonly BASE_URL = 'https://api.themoviedb.org/3';
+
+  async getTrending() {
+    const response = await fetch(`${this.BASE_URL}/trending/all/day?api_key=${this.API_KEY}`);
+    const data = await response.json();
+    return data.results;
+  }
+
+  async searchMedia(query: string, type: string = 'all', year?: string) {
+    console.log('Searching media:', { query, type, year });
+    
+    let endpoint = '';
+    const params = new URLSearchParams({
+      api_key: this.API_KEY,
+      query,
+      include_adult: 'false',
+      language: 'en-US',
+    });
+
+    if (year) {
+      params.append('year', year);
+    }
+
+    switch (type) {
+      case 'movie':
+        endpoint = '/search/movie';
+        break;
+      case 'tv':
+        endpoint = '/search/tv';
+        break;
+      default:
+        endpoint = '/search/multi';
+    }
+
+    const response = await fetch(`${this.BASE_URL}${endpoint}?${params}`);
+    const data = await response.json();
+    return data.results;
+  }
 }
 
-export interface TVShow {
-  id: number;
-  name: string;
-  poster_path: string;
-  overview: string;
-  vote_average: number;
-  first_air_date: string;
-}
-
-export const tmdbClient = {
-  async getTrending(): Promise<(Movie | TVShow)[]> {
-    const response = await fetch(
-      `${BASE_URL}/trending/all/day?api_key=${TMDB_API_KEY}`
-    );
-    const data = await response.json();
-    return data.results;
-  },
-
-  async getMovies(): Promise<Movie[]> {
-    const response = await fetch(
-      `${BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}`
-    );
-    const data = await response.json();
-    return data.results;
-  },
-
-  async getTvShows(): Promise<TVShow[]> {
-    const response = await fetch(
-      `${BASE_URL}/tv/popular?api_key=${TMDB_API_KEY}`
-    );
-    const data = await response.json();
-    return data.results;
-  },
-
-  async search(query: string): Promise<(Movie | TVShow)[]> {
-    const response = await fetch(
-      `${BASE_URL}/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(
-        query
-      )}`
-    );
-    const data = await response.json();
-    return data.results;
-  },
-};
+export const tmdbClient = new TMDBClient();

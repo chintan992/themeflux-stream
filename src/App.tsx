@@ -14,6 +14,7 @@ import Movies from "./pages/Movies";
 import TvShows from "./pages/TvShows";
 import Saved from "./pages/Saved";
 import Settings from "./pages/Settings";
+import SearchResults from "./pages/SearchResults";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
                     <Route path="/tv-shows" element={<TvShows />} />
                     <Route path="/saved" element={<Saved />} />
                     <Route path="/settings" element={<Settings />} />
+                    <Route path="/search" element={<SearchResults />} />
                   </Routes>
                 </main>
                 <Footer />
