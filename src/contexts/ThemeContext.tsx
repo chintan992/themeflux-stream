@@ -41,6 +41,40 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     loadPreferences();
   }, [user]);
 
+  useEffect(() => {
+    // Apply theme classes to document
+    document.documentElement.classList.remove('dark', 'light', 'purple');
+    document.documentElement.classList.add(theme);
+    
+    // Update CSS variables based on theme
+    const root = document.documentElement;
+    const themeColors = {
+      dark: {
+        background: '#121212',
+        primary: '#6D28D9',
+        secondary: '#0D9488',
+        accent: '#E11D48',
+      },
+      light: {
+        background: '#FFFFFF',
+        primary: '#8B5CF6',
+        secondary: '#14B8A6',
+        accent: '#F43F5E',
+      },
+      purple: {
+        background: '#2E1065',
+        primary: '#A855F7',
+        secondary: '#38BDF8',
+        accent: '#FB7185',
+      },
+    };
+
+    const colors = themeColors[theme];
+    Object.entries(colors).forEach(([key, value]) => {
+      root.style.setProperty(`--${key}`, value);
+    });
+  }, [theme]);
+
   const setTheme = async (newTheme: Theme) => {
     setThemeState(newTheme);
     if (user) {

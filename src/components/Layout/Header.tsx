@@ -1,9 +1,22 @@
 import React from 'react';
-import { Search, Bell, User } from 'lucide-react';
+import { Search, Bell, User, Sun, Moon, Palette } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
+
+  const themeIcons = {
+    light: <Sun className="h-5 w-5" />,
+    dark: <Moon className="h-5 w-5" />,
+    purple: <Palette className="h-5 w-5" />,
+  };
 
   return (
     <header className="h-16 fixed top-0 right-0 left-64 bg-background/80 backdrop-blur-sm border-b border-border z-50">
@@ -14,29 +27,41 @@ const Header = () => {
             <input
               type="search"
               placeholder="Search movies, TV shows..."
-              className="w-full h-10 pl-10 pr-4 rounded-full bg-muted/50 border border-border focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full h-12 pl-10 pr-4 rounded-full bg-muted/50 border border-border focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
         </div>
 
         <div className="flex items-center space-x-4">
-          <select
-            value={theme}
-            onChange={(e) => setTheme(e.target.value as any)}
-            className="bg-muted/50 border border-border rounded-lg px-3 py-1.5"
-          >
-            <option value="dark">Dark</option>
-            <option value="light">Light</option>
-            <option value="purple">Purple</option>
-          </select>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="h-12 w-12">
+                {themeIcons[theme]}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => setTheme('light')} className="touch-active">
+                <Sun className="mr-2 h-4 w-4" />
+                Light
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme('dark')} className="touch-active">
+                <Moon className="mr-2 h-4 w-4" />
+                Dark
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme('purple')} className="touch-active">
+                <Palette className="mr-2 h-4 w-4" />
+                Purple
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-          <button className="p-2 hover:bg-accent/10 rounded-full">
+          <Button variant="ghost" size="icon" className="h-12 w-12">
             <Bell className="h-5 w-5" />
-          </button>
+          </Button>
 
-          <button className="p-2 hover:bg-accent/10 rounded-full">
+          <Button variant="ghost" size="icon" className="h-12 w-12">
             <User className="h-5 w-5" />
-          </button>
+          </Button>
         </div>
       </div>
     </header>
