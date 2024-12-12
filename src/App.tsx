@@ -8,6 +8,9 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Sidebar from "./components/Layout/Sidebar";
 import Header from "./components/Layout/Header";
 import Index from "./pages/Index";
+import Trending from "./pages/Trending";
+import Movies from "./pages/Movies";
+import Saved from "./pages/Saved";
 import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
@@ -27,6 +30,9 @@ const App = () => (
                 <main className="mt-16 p-6">
                   <Routes>
                     <Route path="/" element={<Index />} />
+                    <Route path="/trending" element={<Trending />} />
+                    <Route path="/movies" element={<Movies />} />
+                    <Route path="/saved" element={<Saved />} />
                     <Route path="/settings" element={<Settings />} />
                   </Routes>
                 </main>

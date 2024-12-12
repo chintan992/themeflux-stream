@@ -28,6 +28,14 @@ export const tmdbClient = {
     return data.results;
   },
 
+  async getMovies(): Promise<Movie[]> {
+    const response = await fetch(
+      `${BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}`
+    );
+    const data = await response.json();
+    return data.results;
+  },
+
   async search(query: string): Promise<(Movie | TVShow)[]> {
     const response = await fetch(
       `${BASE_URL}/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(
