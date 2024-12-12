@@ -7,6 +7,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Sidebar from "./components/Layout/Sidebar";
 import Header from "./components/Layout/Header";
+import Footer from "./components/Layout/Footer";
 import Index from "./pages/Index";
 import Trending from "./pages/Trending";
 import Movies from "./pages/Movies";
@@ -26,9 +27,9 @@ const App = () => (
           <BrowserRouter>
             <div className="flex min-h-screen bg-background text-foreground">
               <Sidebar />
-              <div className="flex-1 ml-0 md:ml-64">
+              <div className="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen">
                 <Header />
-                <main className="mt-16 p-6">
+                <main className="mt-16 p-6 flex-1">
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/trending" element={<Trending />} />
@@ -38,6 +39,7 @@ const App = () => (
                     <Route path="/settings" element={<Settings />} />
                   </Routes>
                 </main>
+                <Footer />
               </div>
             </div>
           </BrowserRouter>

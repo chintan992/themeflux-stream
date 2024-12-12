@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, TrendingUp, Film, Tv, BookmarkCheck, Settings, LogOut, Menu, X } from 'lucide-react';
+import { Home, TrendingUp, Film, Tv, BookmarkCheck, Settings, LogOut, Menu } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import Logo from '../Logo';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -23,7 +24,7 @@ const Sidebar = () => {
   const NavContent = () => (
     <>
       <div className="flex items-center mb-8">
-        <h1 className="text-2xl font-bold text-primary">Let's Stream</h1>
+        <Logo />
       </div>
 
       <nav className="space-y-2">
