@@ -10,6 +10,7 @@ import Header from "./components/Layout/Header";
 import Index from "./pages/Index";
 import Trending from "./pages/Trending";
 import Movies from "./pages/Movies";
+import TvShows from "./pages/TvShows";
 import Saved from "./pages/Saved";
 import Settings from "./pages/Settings";
 
@@ -25,13 +26,14 @@ const App = () => (
           <BrowserRouter>
             <div className="flex min-h-screen bg-background text-foreground">
               <Sidebar />
-              <div className="flex-1 ml-64">
+              <div className="flex-1 ml-0 md:ml-64">
                 <Header />
                 <main className="mt-16 p-6">
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/trending" element={<Trending />} />
                     <Route path="/movies" element={<Movies />} />
+                    <Route path="/tv-shows" element={<TvShows />} />
                     <Route path="/saved" element={<Saved />} />
                     <Route path="/settings" element={<Settings />} />
                   </Routes>
