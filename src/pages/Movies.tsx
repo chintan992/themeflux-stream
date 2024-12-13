@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { tmdbClient } from '@/lib/tmdb';
-import MediaCard from '@/components/MediaCard';
+import { tmdbClient } from '../lib/tmdb';
+import MediaCard from '../components/MediaCard';
 
-const Movies = () => {
-  const { data: movies, isLoading } = useQuery({
+const Movies: React.FC = () => {
+  const { data: movies, isLoading } = useQuery<Movie[]>({
     queryKey: ['movies'],
     queryFn: () => tmdbClient.getMovies(),
   });

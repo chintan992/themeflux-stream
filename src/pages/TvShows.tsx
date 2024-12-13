@@ -1,10 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { tmdbClient } from "@/lib/tmdb";
-import MediaCard from "@/components/MediaCard";
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { tmdbClient } from '../lib/tmdb';
+import MediaCard from '../components/MediaCard';
+import { TVShow } from '../lib/types';
 
-const TvShows = () => {
-  const { data: shows, isLoading } = useQuery({
-    queryKey: ["tvShows"],
+const TvShows: React.FC = () => {
+  const { data: shows, isLoading } = useQuery<TVShow[]>({
+    queryKey: ['tvShows'],
     queryFn: () => tmdbClient.getTvShows(),
   });
 

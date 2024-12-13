@@ -9,6 +9,7 @@ import Sidebar from "./components/Layout/Sidebar";
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
 import Index from "./pages/Index";
+import Home from "./pages/Home";
 import Trending from "./pages/Trending";
 import Movies from "./pages/Movies";
 import TvShows from "./pages/TvShows";
@@ -32,7 +33,8 @@ const App = () => (
                 <Header />
                 <main className="mt-16 p-6 flex-1">
                   <Routes>
-                    <Route path="/" element={<Index />} />
+                    <Route path="/" element={<Index />} /> 
+                    <Route path="/home" element={<Home />} />
                     <Route path="/trending" element={<Trending />} />
                     <Route path="/movies" element={<Movies />} />
                     <Route path="/tv-shows" element={<TvShows />} />

@@ -1,4 +1,4 @@
-import { Movie, TVShow } from '@/lib/tmdb';
+import { Movie, TVShow } from './types';
 
 class TMDBClient {
   private readonly API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -36,7 +36,27 @@ class TMDBClient {
         endpoint = '/search/multi';
     }
 
-    const response = await fetch(`${this.BASE_URL}${endpoint}?${params}`);
+    try {
+        const response = await fetch(`${this.BASE_URL}${endpoint}?${params}`);
+        const data = await response.json();
+        if (!data.results) {
+            throw new Error('No results found');
+        }
+        return data.results;
+    } catch (error) {
+        console.error('Error fetching media:', error);
+        return []; // Return an empty array on error
+    }
+  }
+
+  async getTvShows() {
+    const response = await fetch(`${this.BASE_URL}/tv/popular?api_key=${this.API_KEY}`);
+    const data = await response.json();
+    return data.results;
+  }
+
+  async getMovies() {
+    const response = await fetch(`${this.BASE_URL}/movie/popular?api_key=${this.API_KEY}`);
     const data = await response.json();
     return data.results;
   }

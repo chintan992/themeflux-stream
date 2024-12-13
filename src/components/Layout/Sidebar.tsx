@@ -13,7 +13,7 @@ const Sidebar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigation = [
-    { name: 'Home', icon: Home, path: '/' },
+    { name: 'Home', icon: Home, path: '/home' },
     { name: 'Trending', icon: TrendingUp, path: '/trending' },
     { name: 'Movies', icon: Film, path: '/movies' },
     { name: 'TV Shows', icon: Tv, path: '/tv-shows' },

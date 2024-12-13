@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { db } from '../lib/firebase';
 import { useAuth } from './AuthContext';
 
 type Theme = 'dark' | 'light' | 'purple';
@@ -21,7 +21,7 @@ const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
-  const [theme, setThemeState] = useState<Theme>('dark');
+  const [theme, setThemeState] = useState<Theme>('light'); // Changed from 'dark' to 'light'
   const [proxy, setProxyState] = useState<string>('');
 
   useEffect(() => {
@@ -51,9 +51,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     const themeColors = {
       dark: {
         background: '#121212',
-        primary: '#6D28D9',
-        secondary: '#0D9488',
-        accent: '#E11D48',
+        primary: '#818CF8',
+        secondary: '#34D399',
+        accent: '#F472B6',
       },
       light: {
         background: '#FFFFFF',
